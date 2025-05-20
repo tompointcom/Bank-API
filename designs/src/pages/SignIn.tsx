@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import argentBankLogo from "../assets/img/argentBankLogo.png";
 import { login as loginApi } from "../services/authService";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login as loginAction } from "../store/authSlice";
 
 const SignIn = () => {
   const [username, setUsername] = useState("");
@@ -9,6 +11,7 @@ const SignIn = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,8 +20,7 @@ const SignIn = () => {
     try {
       const token = await loginApi(username, password);
       setLoading(false);
-      // Stocker le token (ex: localStorage) et rediriger
-      localStorage.setItem("token", token);
+      dispatch(loginAction(token));
       navigate("/profile");
     } catch (err) {
       setLoading(false);
