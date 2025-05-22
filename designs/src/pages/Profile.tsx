@@ -58,7 +58,7 @@ const Profile = () => {
           </button>
         </div>
       </nav>
-      <main className="main bg-dark">
+      <main className="main bg-light-grey">
         <div className="header">
           <h1>Welcome back<br />{profile?.firstName} {profile?.lastName}!</h1>
           <button className="edit-button">Edit Name</button>

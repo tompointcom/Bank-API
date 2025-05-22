@@ -13,6 +13,10 @@ body {
   min-height: 100vh;
 }
 
+h1 {
+  color: #20323f;
+}
+
 .main {
   flex: 1;
     margin: 0;
@@ -21,8 +25,8 @@ body {
   min-height: 80vh;
 }
 
-.bg-dark {
-  background-color: #12002b;
+.bg-light-grey {
+  background-color: #dfe6ed;
 }
 
 .sr-only {
@@ -222,7 +226,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid black;
+  border: 1px solid #c3cfd9;
   background-color: #fff;
   width: 80%;
   margin: 0 auto;
@@ -241,11 +245,12 @@ body {
 
 .account-amount-description {
   margin: 0;
+  padding-top: 5px;
 }
 
 .account-title {
   margin: 0;
-  padding: 0;
+  padding: 0 0 5px 0;
   font-size: 1rem;
   font-weight: normal;
 }
@@ -256,8 +261,9 @@ body {
 }
 
 .edit-button {
-  border-color: #00bc77;
-  background-color: #00bc77;
+  border: none;
+  background-color: #6458f5;  
+  border-radius: 3px;
   color: #fff;
   font-weight: bold;
   padding: 10px;
@@ -275,8 +281,9 @@ body {
   font-size: 1.1rem;
   font-weight: bold;
   margin-top: 1rem;
-  border-color: #00bc77;
-  background-color: #00bc77;
+  border: none;
+  border-radius: 3px;
+  background-color: #6458f5;
   color: #fff;
 }
 
