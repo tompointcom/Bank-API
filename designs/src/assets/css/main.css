@@ -168,8 +168,9 @@ h1 {
   font-size: 1.1rem;
   font-weight: bold;
   margin-top: 1rem;
-  border-color: #00bc77;
-  background-color: #00bc77;
+  border: none;
+  border-radius: 3px;
+  background-color: #6458f5;
   color: #fff;
 }
 
