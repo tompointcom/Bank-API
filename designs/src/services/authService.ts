@@ -27,3 +27,17 @@ export async function getProfile(token: string) {
   }
   return data.body;
 }
+
+export async function updateProfile(token: string, data: { firstName: string; lastName: string }) {
+  const response = await fetch('http://localhost:3001/api/v1/user/profile', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+  });
+  if (!response.ok) throw new Error('Erreur API');
+  const result = await response.json();
+  return result.body;
+}

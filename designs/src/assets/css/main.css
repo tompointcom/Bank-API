@@ -270,6 +270,39 @@ h1 {
   padding: 10px;
 }
 
+.edit-name-fields {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.edit-input {
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  width: 180px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.edit-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.edit-button-2 {
+  background-color: #fff;
+  border: 1px solid #b2b2f0;
+  color: #6052f5;
+  padding: 10px;
+  border-radius: 3px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 130px;
+}
+
 .header {
   color: #fff;
   margin-bottom: 2rem;
