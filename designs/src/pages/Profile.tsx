@@ -1,63 +1,42 @@
 import { useEffect, useState } from "react";
-import argentBankLogo from "../assets/img/argentBankLogo.png";
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams, Link } from 'react-router-dom';
-import { logout } from '../store/authSlice';
+import { useParams } from 'react-router-dom';
 import { getProfile } from '../services/authService';
 import type { RootState } from '../store/store';
+import { setProfile } from '../store/authSlice';
+
 
 const Profile = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { userId } = useParams();
   const token = useSelector((state: RootState) => state.auth.token);
-  const [profile, setProfile] = useState<{ firstName: string; lastName: string } | null>(null);
+  const [profile, setProfileState] = useState<{ firstName: string; lastName: string } | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (!token || !userId) return;
-    getProfile(token)
-      .then((data) => {
-        setProfile(data);
-        setLoading(false);
-      })
-      .catch(() => {
-        setError("Impossible de charger le profil utilisateur.");
-        setLoading(false);
-      });
-  }, [token, userId]);
+useEffect(() => {
+  if (!token || !userId) return;
 
-  const handleLogout = () => {
-    dispatch(logout());
-    navigate('/sign-in');
-  };
+  setLoading(true);
+  setError("");
+
+  getProfile(token)
+    .then((data) => {
+      setProfileState(data);
+      dispatch(setProfile(data));
+      setLoading(false);
+    })
+    .catch(() => {
+      setError("Impossible de charger le profil utilisateur.");
+      setLoading(false);
+    });
+}, [token, userId, dispatch]);
 
   if (loading) return <div>Chargement...</div>;
   if (error) return <div style={{ color: 'red' }}>{error}</div>;
 
   return (
     <div>
-      <nav className="main-nav">
-        <a className="main-nav-logo" href="/">
-          <img
-            className="main-nav-logo-image"
-            src={argentBankLogo}
-            alt="Argent Bank Logo"
-          />
-          <h1 className="sr-only">Argent Bank</h1>
-        </a>
-        <div>
-          <Link className="main-nav-item" to={"#"}>
-            <i className="fa fa-user-circle"></i>
-            {profile?.firstName}
-          </Link>
-          <button className="main-nav-item" onClick={handleLogout} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
-            <i className="fa fa-sign-out"></i>
-            Sign Out
-          </button>
-        </div>
-      </nav>
       <main className="main bg-light-grey">
         <div className="header">
           <h1>Welcome back<br />{profile?.firstName} {profile?.lastName}!</h1>
