@@ -18,7 +18,6 @@ const SignIn = () => {
     setError("");
     try {
       const token = await loginApi(username, password);
-      // Décoder le token pour obtenir l'id utilisateur
       const payload = JSON.parse(atob(token.split('.')[1]));
       const userId = payload.id;
       setLoading(false);

@@ -13,11 +13,9 @@ const Profile = () => {
   const [error, setError] = useState("");
   const dispatch = useDispatch();
 
-
   const [isEditing, setIsEditing] = useState(false);
   const [editFirstName, setEditFirstName] = useState("");
   const [editLastName, setEditLastName] = useState("");
-
   useEffect(() => {
     if (!token || !userId) return;
 
@@ -36,10 +34,6 @@ const Profile = () => {
       });
   }, [token, userId, dispatch]);
 
-  if (loading) return <div>Chargement...</div>;
-  if (error) return <div style={{ color: 'red' }}>{error}</div>;
-
-
   const handleEditClick = () => {
     setEditFirstName(profile?.firstName || "");
     setEditLastName(profile?.lastName || "");
@@ -50,23 +44,24 @@ const Profile = () => {
     setIsEditing(false);
   };
 
-const handleSave = async () => {
-  if (!token) return;
-  try {
-    setLoading(true);
-    const updated = await updateProfile(token, {
-      firstName: editFirstName,
-      lastName: editLastName,
-    });
-    setProfileState(updated);
-    dispatch(setProfile(updated));
-    setIsEditing(false);
-    setLoading(false);
-  } catch {
-    setError("Erreur lors de la sauvegarde du profil.");
-    setLoading(false);
-  }
-};
+  const handleSave = async () => {
+    if (!token) return;
+    try {
+      setLoading(true);
+      const updated = await updateProfile(token, {
+        firstName: editFirstName,
+        lastName: editLastName,
+      });
+      setProfileState(updated);
+      dispatch(setProfile(updated));
+      setIsEditing(false);
+      setLoading(false);
+    } catch {
+      setError("Erreur lors de la sauvegarde du profil.");
+      setLoading(false);
+    }
+  };
+
   if (loading) return <div>Chargement...</div>;
   if (error) return <div style={{ color: 'red' }}>{error}</div>;
 
@@ -116,7 +111,8 @@ const handleSave = async () => {
             <p className="account-amount-description">Available Balance</p>
           </div>
           <div className="account-content-wrapper cta">
-            <button className="transaction-button">View transactions</button>
+            <button 
+            className="transaction-button">View transactions</button>
           </div>
         </section>
         <section className="account">

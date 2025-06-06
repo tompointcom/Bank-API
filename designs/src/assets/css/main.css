@@ -351,3 +351,35 @@ h1 {
     width: 200px;
   }
 }
+
+
+.transactions-page {
+  background: #f3f6fa;
+  min-height: 100vh;
+  padding: 2rem;
+}
+.transactions-header {
+  background: #fff;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+  text-align: center;
+}
+.transactions-table {
+  width: 100%;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  border-collapse: collapse;
+}
+.transactions-table th, .transactions-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+.transactions-table tr:last-child td {
+  border-bottom: none;
+}
+.transaction-details {
+  text-align: left;
+  padding-left: 1rem;
+}
