@@ -10,7 +10,7 @@ interface PrivateRouteProps {
 const PrivateRoute = ({ children }: PrivateRouteProps) => {
   const token = useSelector((state: RootState) => state.auth.token);
   if (!token) {
-    return <Navigate to="/sign-in" replace />;
+    return <Navigate to="/" replace />;
   }
   return <>{children}</>;
 };

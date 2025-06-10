@@ -38,7 +38,7 @@ paths:
         '401':
           description: Identifiants invalides
   /user/profile:
-    post:
+    get:
       summary: Récupérer le profil utilisateur
       description: Retourne les informations du profil de l’utilisateur authentifié.
       security:
