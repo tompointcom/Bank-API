@@ -4,6 +4,8 @@ info:
   version: 1.0.0
 servers:
   - url: http://localhost:3001/api/v1
+security:
+  - bearerAuth: []
 paths:
   /user/login:
     post:
@@ -11,6 +13,7 @@ paths:
       description: Retourne un token JWT si les identifiants sont valides.
       tags:
         - Authentification
+      security: []
       requestBody:
         required: true
         content:
@@ -40,9 +43,7 @@ paths:
   /user/profile:
     get:
       summary: Récupérer le profil utilisateur
-      description: Retourne les informations du profil de l’utilisateur authentifié.
-      security:
-        - bearerAuth: []
+      description: Retourne les informations du profil de l'utilisateur authentifié.
       responses:
         '200':
           description: Profil utilisateur récupéré
@@ -61,12 +62,10 @@ paths:
           description: Non authentifié ou token invalide
   /user/accounts/{accountId}/transactions:
     get:
-      summary: Récupérer les transactions d’un compte
+      summary: Récupérer les transactions d'un compte
       description: Retourne la liste des transactions pour un compte utilisateur donné.
       tags:
         - Transactions
-      security:
-        - bearerAuth: []
       parameters:
         - name: accountId
           in: path
@@ -88,13 +87,40 @@ paths:
         '404':
           description: Compte ou transactions non trouvés
   /user/accounts/{accountId}/transactions/{transactionId}:
-    patch:
-      summary: Modifier une transaction (catégorie ou notes)
-      description: Permet de modifier la catégorie ou les notes d’une transaction.
+    get:
+      summary: Récupérer les détails d'une transaction
+      description: Retourne les détails complets d'une transaction spécifique.
       tags:
         - Transactions
-      security:
-        - bearerAuth: []
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: ID du compte bancaire
+          schema:
+            type: string
+        - name: transactionId
+          in: path
+          required: true
+          description: ID de la transaction
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Détails de la transaction récupérés avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+        '401':
+          description: Non authentifié ou token invalide
+        '404':
+          description: Transaction non trouvée
+    patch:
+      summary: Modifier une transaction (catégorie ou notes)
+      description: Permet de modifier la catégorie ou les notes d'une transaction.
+      tags:
+        - Transactions
       parameters:
         - name: accountId
           in: path
